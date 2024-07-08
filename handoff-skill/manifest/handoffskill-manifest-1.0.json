@@ -1,0 +1,62 @@
+{
+    "$schema": "https://schemas.botframework.com/schemas/skills/skill-manifest-2.0.0.json",
+    "$id": "HandOffSkill",
+    "name": "Handoff Skill",
+    "version": "1.0",
+    "description": "This is a sample handoff skill",
+    "publisherName": "Microsoft",
+    "privacyUrl": "https://handoffskill.contoso.com/privacy.html",
+    "copyright": "Copyright (c) Microsoft Corporation. All rights reserved.",
+    "license": "",
+    "iconUrl": "https://handoffskill.contoso.com/icon.png",
+    "tags": [
+        "handoff",
+        "agent",
+        "engagementhub"
+    ],
+    "endpoints": [
+        {
+            "name": "default",
+            "protocol": "BotFrameworkV3",
+            "description": "Default endpoint for the skill",
+            "endpointUrl": "http://handoffskill.contoso.com/api/messages",
+            "msAppId": "00000000-0000-0000-0000-000000000000"
+        }
+    ],
+    "activities": {
+        "echo": {
+            "type": "message",
+            "description": "Echoes back the user message.",
+            "value": {
+                "type": "object"
+            }
+        },
+        "handoff": {
+            "type": "event",
+            "name": "Handoff",
+            "description": "Hands off the conversation to a live agent",
+            "value": {
+                "$ref": "#/definitions/HandOffInfo"
+            }
+        }
+    },
+    "definitions": {
+        "HandOffInfo": {
+            "type": "object",
+            "required": [
+                "userName",
+                "conversationHistory"
+            ],
+            "properties": {
+                "userName": {
+                    "type": "string",
+                    "description": "The name of the user"
+                },
+                "conversationHistory": {
+                    "type": "string",
+                    "description": "The conversation history"
+                }
+            }
+        }
+    }
+}
